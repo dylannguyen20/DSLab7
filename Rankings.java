@@ -41,7 +41,7 @@ public class Rankings {
 		 * Sorts and prints the top 5 ranked scores.
 		 */
 		TreeMap<String,Double> Rankings = new TreeMap<>(scoreComp);
-		Rankings.putAll(Rankings);		
+		Rankings.putAll(Scores);		
 		Iterator<String> itr = Rankings.keySet().iterator();
 		int count = 0;
 		
