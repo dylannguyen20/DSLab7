@@ -14,7 +14,7 @@ import java.util.TreeSet;
 public class Rankings {
 	
 	private TreeMap<String,Double> Scores = new TreeMap<>();
-	private TreeMap<String,TreeSet> songs;
+	private TreeMap<String,ArrayList<String>> songs;
 	
 	public TreeMap<String,Double> Rank (String s) {
 		
@@ -27,7 +27,7 @@ public class Rankings {
 		for (int i = 0; i < songs.size(); i++) {		
 			double score = 0.0;			
 			for (int j = 0; i < terms.length; i++) {
-				score = score + tf(terms[j],songs.keySet().toArray()[i]) * IDF(terms[j],songs.keySet().toArray()[i]);				
+				score = score + tf(terms[j],songs.get(songs.keySet().toArray()[i])) * IDF(terms[j],songs.get(songs.keySet().toArray()[i]));				
 		}
 			Scores.put((String) songs.keySet().toArray()[i], score);
 	}
