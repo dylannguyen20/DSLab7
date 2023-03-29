@@ -4,9 +4,9 @@ import java.util.*;
 import java.io.*;
 
 /**
- * 
+ * Class for calculating tf value of a search.
  * @author Seth Tedder
- * @version 28 March, 2023
+ * @version 29 March, 2023
  */
 public class Calc_tf {
 	
@@ -18,6 +18,9 @@ public class Calc_tf {
 	 */
 	public Calc_tf(File f) {
 		file = f;
+	}
+	public Calc_tf() {
+		file = null;
 	}
 	
 	/**
@@ -60,6 +63,27 @@ public class Calc_tf {
 		double result = totalP / totalW;
 		return result;
 	}
+	
+	/**
+	 * Calculates tf using a phrase and an ArrayList of strings
+	 * @param phrase
+	 * @param list
+	 * @return
+	 */
+	public double tfCalc(String phrase, ArrayList<String> list) {
+		phrase = phrase.toLowerCase();
+		double totalW = list.size();
+		double totalP = 0;
+		
+		for (String word : list) {
+			if (word.toLowerCase().equals(phrase)) {
+				totalP++;
+			}
+		}
+		
+		double result = totalP / totalW;
+		return result;
+	}
 	/**
 	 * Main method used for testing
 	 * @param args
@@ -68,5 +92,18 @@ public class Calc_tf {
 		File file = new File("Brighton Rock.txt");
 		Calc_tf tf = new Calc_tf(file);
 		System.out.println(tf.tfCalc("will"));
+		
+		ArrayList<String> list = new ArrayList<String>();
+		Calc_tf tf1 = new Calc_tf();
+		try {
+			Scanner scnr = new Scanner(file);
+			while (scnr.hasNext()) {
+				list.add(scnr.next());
+			}
+			scnr.close();
+		} catch(Exception e) {
+			System.out.println("File not found!");
+		}
+		System.out.println(tf1.tfCalc("will", list));
 	}
 }
